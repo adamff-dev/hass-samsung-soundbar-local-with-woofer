@@ -22,7 +22,7 @@ async def async_setup_entry(hass, entry: ConfigEntry, async_add_entities) -> Non
 
     async_add_entities(
         [
-            SoundbarWooferButton(
+            SoundbarButton(
                 coordinator,
                 soundbar,
                 host,
@@ -30,7 +30,7 @@ async def async_setup_entry(hass, entry: ConfigEntry, async_add_entities) -> Non
                 "Woofer +",
                 soundbar.sub_plus,
             ),
-            SoundbarWooferButton(
+            SoundbarButton(
                 coordinator,
                 soundbar,
                 host,
@@ -38,13 +38,29 @@ async def async_setup_entry(hass, entry: ConfigEntry, async_add_entities) -> Non
                 "Woofer -",
                 soundbar.sub_minus,
             ),
+            SoundbarButton(
+                coordinator,
+                soundbar,
+                host,
+                "volume_up",
+                "Volume +",
+                soundbar.volume_up,
+            ),
+            SoundbarButton(
+                coordinator,
+                soundbar,
+                host,
+                "volume_down",
+                "Volume -",
+                soundbar.volume_down,
+            ),
         ],
         True,
     )
 
 
-class SoundbarWooferButton(CoordinatorEntity, ButtonEntity):
-    """Representation of a woofer control button."""
+class SoundbarButton(CoordinatorEntity, ButtonEntity):
+    """Representation of a soundbar control button."""
 
     def __init__(
         self,
